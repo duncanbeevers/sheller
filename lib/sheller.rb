@@ -3,7 +3,7 @@ require 'POpen4'
 module Sheller
   VERSION = '0.0.1'
   
-  INESCAPABLE_ARGS = [ :> ]
+  INESCAPABLE_ARGS = [ :>, :|, :<, :>>, :'>&2', :'1>&2' ]
   INESCAPABLE = Hash[INESCAPABLE_ARGS.map { |a| [ a, true ] }]
   
   SHELL_SAFE = /\A[0-9A-Za-z+,.\/:=@_-]+\z/
