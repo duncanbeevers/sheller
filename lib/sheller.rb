@@ -1,6 +1,8 @@
 require 'POpen4'
 
 module Sheller
+  VERSION = '0.0.1'
+  
   INESCAPABLE_ARGS = [ :> ]
   INESCAPABLE = Hash[INESCAPABLE_ARGS.map { |a| [ a, true ] }]
   
