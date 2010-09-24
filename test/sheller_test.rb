@@ -20,4 +20,12 @@ class ShellerTest < Test::Unit::TestCase
     assert_equal "frog\n", Sheller.execute('echo', 'frog').stdout
   end
   
+  def test_command_one_argument_with_quotes
+    assert_equal "\"toad\"\n", Sheller.execute('echo', '"toad"').stdout
+  end
+  
+  def test_command_one_argument_with_redirect
+    assert_equal "toad > newt\n", Sheller.execute('echo', 'toad > newt').stdout
+  end
+  
 end

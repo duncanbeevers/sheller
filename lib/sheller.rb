@@ -1,7 +1,8 @@
 module Sheller
   class << self
     def execute(*args)
-      ShellerResult.new(`#{args.join(' ')}`)
+      cmd = args.map { |a| "\"%s\"" % a.gsub('"', '\"') }.join(' ')
+      ShellerResult.new(`#{cmd}`)
     end
   end
   
