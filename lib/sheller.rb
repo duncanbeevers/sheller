@@ -1,5 +1,3 @@
-require 'fileutils'
-
 module Sheller
   INESCAPABLE_ARGS = [ :> ]
   INESCAPABLE = Hash[INESCAPABLE_ARGS.map { |a| [ a, true ] }]
