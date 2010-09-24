@@ -1,4 +1,4 @@
-require 'open3'
+require 'POpen4'
 
 module Sheller
   INESCAPABLE_ARGS = [ :> ]
@@ -10,7 +10,13 @@ module Sheller
     end
     
     def execute(*args)
-      ShellerResult.new(*Open3.popen3(command(*args)))
+      stdout, stderr = nil
+      status = POpen4.popen4(command(*args)) do |_stdout, _stderr, _stdin, _pid|
+        stdout = _stdout.read
+        stderr = _stderr.read
+      end
+      # results.push($?)
+      ShellerResult.new(stdout, stderr, status)
     end
     
     private
@@ -22,11 +28,12 @@ module Sheller
   end
   
   class ShellerResult
-    attr_reader 'stdout', 'stderr'
+    attr_reader 'stdout', 'stderr', 'exit_status'
     
-    def initialize(_, stdout, stderr)
-      @stdout = stdout.read
-      @stderr = stderr.read
+    def initialize(stdout, stderr, exit_status)
+      @stdout = stdout
+      @stderr = stderr
+      @exit_status = exit_status
     end
   end
 end

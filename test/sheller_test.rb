@@ -41,4 +41,11 @@ class ShellerTest < Test::Unit::TestCase
     assert_equal "turtle\n", Sheller.execute('./echo_turtle_stderr').stderr
   end
   
+  def test_successful_exit_status_code
+    assert_equal 0, Sheller.execute('echo').exit_status
+  end
+  
+  def test_unsuccessful_exit_status_code
+    assert_not_equal 0, Sheller.execute('false').exit_status
+  end
 end
