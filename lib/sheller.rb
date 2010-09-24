@@ -5,9 +5,12 @@ module Sheller
   INESCAPABLE = Hash[INESCAPABLE_ARGS.map { |a| [ a, true ] }]
   
   class << self
+    def command(*args)
+      args.map { |a| arg_to_cmd(a) }.join(' ')
+    end
+    
     def execute(*args)
-      cmd = args.map { |a| arg_to_cmd(a) }.join(' ')
-      ShellerResult.new(`#{cmd}`)
+      ShellerResult.new(`#{command(*args)}`)
     end
     
     private
