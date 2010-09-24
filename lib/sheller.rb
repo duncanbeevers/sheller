@@ -22,10 +22,11 @@ module Sheller
   end
   
   class ShellerResult
-    attr_reader 'stdout'
+    attr_reader 'stdout', 'stderr'
     
-    def initialize(_, stdout, __)
+    def initialize(_, stdout, stderr)
       @stdout = stdout.read
+      @stderr = stderr.read
     end
   end
 end

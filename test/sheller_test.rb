@@ -37,4 +37,8 @@ class ShellerTest < Test::Unit::TestCase
     assert_equal "mutant\n", File.read('output.txt')
   end
   
+  def test_echo_to_stderr
+    assert_equal "turtle\n", Sheller.execute('./echo_turtle_stderr').stderr
+  end
+  
 end
