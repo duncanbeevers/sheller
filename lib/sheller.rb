@@ -1,3 +1,5 @@
+require 'open3'
+
 module Sheller
   INESCAPABLE_ARGS = [ :> ]
   INESCAPABLE = Hash[INESCAPABLE_ARGS.map { |a| [ a, true ] }]
@@ -8,7 +10,7 @@ module Sheller
     end
     
     def execute(*args)
-      ShellerResult.new(`#{command(*args)}`)
+      ShellerResult.new(*Open3.popen3(command(*args)))
     end
     
     private
@@ -22,8 +24,8 @@ module Sheller
   class ShellerResult
     attr_reader 'stdout'
     
-    def initialize(stdout)
-      @stdout = stdout
+    def initialize(_, stdout, __)
+      @stdout = stdout.read
     end
   end
 end
