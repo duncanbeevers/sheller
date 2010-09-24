@@ -1,4 +1,4 @@
-class Sheller
+module Sheller
   class << self
     def execute(cmd)
       `#{cmd}`
