@@ -1,7 +1,7 @@
 module Sheller
   class << self
-    def execute(cmd)
-      ShellerResult.new(`#{cmd}`)
+    def execute(*args)
+      ShellerResult.new(`#{args.join(' ')}`)
     end
   end
   

@@ -16,4 +16,8 @@ class ShellerTest < Test::Unit::TestCase
     assert_equal "turtle\n", Sheller.execute('./echo_turtle').stdout
   end
   
+  def test_command_one_argument
+    assert_equal "frog\n", Sheller.execute('echo', 'frog').stdout
+  end
+  
 end
