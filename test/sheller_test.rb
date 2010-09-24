@@ -13,7 +13,7 @@ class ShellerTest < Test::Unit::TestCase
   end
   
   def test_command_no_arguments
-    assert_equal "turtle\n", Sheller.execute('./echo_turtle')[:STDOUT]
+    assert_equal "turtle\n", Sheller.execute('./echo_turtle').stdout
   end
   
 end
