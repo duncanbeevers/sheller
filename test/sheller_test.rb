@@ -5,7 +5,8 @@ class ShellerTest < Test::Unit::TestCase
   
   def test_command_no_arguments
     Dir.chdir(TEST_DIR) do
-      assert_equal "turtle\n", Sheller.execute('./echo_turtle')
+      assert_equal "turtle\n", Sheller.execute('./echo_turtle')[:STDOUT]
     end
   end
+  
 end

@@ -1,7 +1,7 @@
 module Sheller
   class << self
     def execute(cmd)
-      `#{cmd}`
+      { :STDOUT => `#{cmd}` }
     end
   end
 end
