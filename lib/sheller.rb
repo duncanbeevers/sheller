@@ -6,6 +6,9 @@ module Sheller
   INESCAPABLE_ARGS = [ :> ]
   INESCAPABLE = Hash[INESCAPABLE_ARGS.map { |a| [ a, true ] }]
   
+  SHELL_SAFE = /\A[0-9A-Za-z+,.\/:=@_-]+\z/
+  ARG_SCAN = /('+)|[^']+/
+  
   class << self
     def command(*args)
       args.map { |a| arg_to_cmd(a) }.join(' ')
@@ -17,15 +20,22 @@ module Sheller
         stdout = _stdout.read
         stderr = _stderr.read
       end
-      # results.push($?)
       ShellerResult.new(stdout, stderr, status)
     end
     
     private
     def arg_to_cmd(arg)
-      INESCAPABLE[arg] ?
-        arg.to_s :
-        "\"%s\"" % arg.gsub('"', '\"')
+      if INESCAPABLE[arg]
+        arg.to_s
+      elsif arg.empty? || SHELL_SAFE =~ arg
+        "'%s'" % arg
+      else
+        result = ''
+        arg.scan(ARG_SCAN) do
+          result << ($1 ? "\\'" * $1.length : "'#{$&}'")
+        end
+        result
+      end
     end
   end
   
