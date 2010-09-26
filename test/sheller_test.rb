@@ -16,7 +16,7 @@ class ShellerTest < Test::Unit::TestCase
   end
   
   def test_command_no_arguments
-    assert_equal "turtle\n", Sheller.execute('./echo_turtle').stdout
+    assert_equal "turtle\n", Sheller.execute('./bin/stdout_turtle').stdout
   end
   
   def test_command_one_argument
@@ -38,7 +38,7 @@ class ShellerTest < Test::Unit::TestCase
   end
   
   def test_echo_to_stderr
-    assert_equal "turtle\n", Sheller.execute('./echo_turtle_stderr').stderr
+    assert_equal "frog\n", Sheller.execute('./bin/stderr_frog').stderr
   end
   
   def test_successful_exit_status_code
