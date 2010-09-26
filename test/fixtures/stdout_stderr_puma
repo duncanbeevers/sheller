@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+$stdout.puts "puma1"
+$stderr.puts "puma2"

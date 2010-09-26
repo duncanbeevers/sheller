@@ -3,8 +3,22 @@ require 'POpen4'
 module Sheller
   VERSION = '0.0.1'
   
-  INESCAPABLE_ARGS = [ :>, :|, :<, :>>, :'>&2', :'1>&2' ]
-  INESCAPABLE = Hash[INESCAPABLE_ARGS.map { |a| [ a, true ] }]
+  INESCAPABLE = {}
+  
+  {
+    'STDOUT_TO_FILE'            => :>,
+    'STDOUT_TO_PIPE'            => :|,
+    'STDOUT_APPEND_TO_FILE'     => :>>,
+    'STDOUT_TO_STDERR'          => :'1>&2',
+    'STDERR_TO_FILE'            => :'2>',
+    'STDERR_TO_STDOUT'          => :'2>&1',
+    'STDERR_APPEND_TO_FILE'     => :'2>>',
+    'STDOUT_AND_STDERR_TO_FILE' => :'&>',
+    'STDIN_FROM_FILE'           => :<
+  }.each do |c, s|
+    const_set(c, s)
+    INESCAPABLE[s] = s.to_s
+  end
   
   SHELL_SAFE = /\A[0-9A-Za-z+,.\/:=@_-]+\z/
   ARG_SCAN = /('+)|[^']+/
