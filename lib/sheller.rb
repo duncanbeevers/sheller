@@ -1,4 +1,4 @@
-require 'POpen4'
+require 'popen4'
 
 module Sheller
   VERSION = '0.0.1'
