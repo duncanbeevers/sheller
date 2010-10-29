@@ -1,7 +1,7 @@
 require 'popen4'
 
 module Sheller
-  VERSION = '0.0.1'
+  VERSION = '0.0.4'
   
   INESCAPABLE = {}
   
@@ -30,11 +30,12 @@ module Sheller
     
     def execute(*args)
       stdout, stderr = nil
-      status = POpen4.popen4(command(*args)) do |_stdout, _stderr, _stdin, _pid|
+      shell_command = command(*args)
+      status = POpen4.popen4(shell_command) do |_stdout, _stderr, _stdin, _pid|
         stdout = _stdout.read
         stderr = _stderr.read
       end
-      ShellerResult.new(stdout, stderr, status)
+      ShellerResult.new(stdout, stderr, status, shell_command)
     end
     
     private
@@ -54,12 +55,13 @@ module Sheller
   end
   
   class ShellerResult
-    attr_reader 'stdout', 'stderr', 'exit_status'
+    attr_reader 'stdout', 'stderr', 'exit_status', 'command'
     
-    def initialize(stdout, stderr, exit_status)
-      @stdout = stdout
-      @stderr = stderr
+    def initialize(stdout, stderr, exit_status, command)
+      @stdout      = stdout
+      @stderr      = stderr
       @exit_status = exit_status
+      @command     = command
     end
   end
 end

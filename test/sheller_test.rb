@@ -89,4 +89,9 @@ class ShellerTest < Test::Unit::TestCase
     result = Sheller.execute('grep', 'Dublin', Sheller::STDIN_FROM_FILE, './fixtures/cities.txt')
     assert_equal "Dublin\n", result.stdout
   end
+  
+  def test_command
+    result = Sheller.execute('echo', 'barnacle')
+    assert_equal "'echo' 'barnacle'", result.command
+  end
 end
