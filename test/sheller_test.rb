@@ -27,6 +27,10 @@ class ShellerTest < Test::Unit::TestCase
     assert_equal ">", Sheller.quote(Sheller::STDOUT_TO_FILE)
   end
   
+  def test_quote_numeric_argument
+    assert_equal "'8'", Sheller.quote(8)
+  end
+  
   def test_command_no_arguments
     assert_equal "turtle\n", Sheller.execute('./fixtures/stdout_turtle').stdout
   end

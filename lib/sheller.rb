@@ -43,7 +43,7 @@ module Sheller
     def arg_to_cmd(arg)
       if INESCAPABLE[arg]
         arg.to_s
-      elsif arg.empty? || SHELL_SAFE =~ arg
+      elsif SHELL_SAFE =~ arg.to_s
         "'%s'" % arg
       else
         result = ''
