@@ -1,7 +1,7 @@
 task :default => :test
 
 task :test do
-  require 'test/sheller_test'
+  require File.expand_path(File.join(File.dirname(__FILE__), 'test/sheller_test'))
 end
 
 require 'rake/gempackagetask'
