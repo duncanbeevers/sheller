@@ -1,7 +1,7 @@
 require 'popen4'
 
 module Sheller
-  VERSION = '0.0.4'
+  VERSION = '0.0.5'
   
   INESCAPABLE = {}
   
