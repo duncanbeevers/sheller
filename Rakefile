@@ -5,8 +5,7 @@ task :test do
 end
 
 require 'rake/gempackagetask'
-$: << File.expand_path(File.join(File.dirname(__FILE__), 'lib'))
-require File.join(File.dirname(__FILE__), 'lib/sheller.rb')
+require File.expand_path(File.join(File.dirname(__FILE__), 'lib/sheller.rb'))
 
 spec = Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
