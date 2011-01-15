@@ -27,6 +27,7 @@ module Sheller
     def command(*args)
       args.map { |a| arg_to_cmd(a) }.join(' ')
     end
+    alias :quote :command
     
     def execute(*args)
       stdout, stderr = nil

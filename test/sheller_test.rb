@@ -15,6 +15,18 @@ class ShellerTest < Test::Unit::TestCase
     Dir.chdir(@original_dir)
   end
   
+  def test_quote
+    assert_equal "'echo'", Sheller.quote("echo")
+  end
+  
+  def test_quote_redirect
+    assert_equal ">", Sheller.quote(:>)
+  end
+  
+  def test_quote_named_redirect
+    assert_equal ">", Sheller.quote(Sheller::STDOUT_TO_FILE)
+  end
+  
   def test_command_no_arguments
     assert_equal "turtle\n", Sheller.execute('./fixtures/stdout_turtle').stdout
   end
