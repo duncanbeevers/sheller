@@ -1,5 +1,3 @@
-require 'popen4'
-
 module Sheller
   VERSION = '0.0.5'
   
@@ -30,6 +28,7 @@ module Sheller
     alias :quote :command
     
     def execute(*args)
+      require 'popen4'
       stdout, stderr = nil
       shell_command = command(*args)
       status = POpen4.popen4(shell_command) do |_stdout, _stderr, _stdin, _pid|
