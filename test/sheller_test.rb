@@ -18,7 +18,11 @@ class ShellerTest < Test::Unit::TestCase
   def test_quote
     assert_equal "'echo'", Sheller.quote("echo")
   end
-  
+
+  def test_quote_varargs
+    assert_equal "'fox' 'food'", Sheller.quote('fox', 'food')
+  end
+
   def test_quote_redirect
     assert_equal ">", Sheller.quote(:>)
   end
